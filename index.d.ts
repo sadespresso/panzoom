@@ -30,9 +30,9 @@ declare module "panzoom" {
     boundsPadding?: number;
     zoomDoubleClickSpeed?: number;
     zoomSpeed?: number;
-    initialX?: number,
-    initialY?: number,
-    initialZoom?: number,
+    initialX?: number;
+    initialY?: number;
+    initialZoom?: number;
     pinchSpeed?: number;
     beforeWheel?: (e: WheelEvent) => void;
     beforeMouseDown?: (e: MouseEvent) => void;
@@ -41,7 +41,7 @@ declare module "panzoom" {
     onDoubleClick?: (e: Event) => void;
 
     /**
-     * Called after user "clicks" with a single tap or mouse button. 
+     * Called after user "clicks" with a single tap or mouse button.
      * The event comes a bit later after a tap, to allow for double
      * tap disambiguation.
      */
@@ -59,6 +59,11 @@ declare module "panzoom" {
     moveBy: (dx: number, dy: number, smooth: boolean) => void;
     moveTo: (x: number, y: number) => void;
     smoothMoveTo: (x: number, y: number) => void;
+    moveToCenterOfElement: (
+      element: Element,
+      xOffset: number,
+      yOffset: number
+    ) => void;
     centerOn: (ui: any) => void;
     center: (fit: boolean) => void;
     zoomTo: (clientX: number, clientY: number, scaleMultiplier: number) => void;
