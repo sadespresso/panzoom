@@ -54,6 +54,12 @@ declare module "panzoom" {
     enableTwoFingerPan?: boolean;
   }
 
+  export interface MoveToCenterOptions {
+    xOffset?: number;
+    yOffset?: number;
+    smooth?: boolean;
+  }
+
   export interface PanZoom {
     dispose: () => void;
     moveBy: (dx: number, dy: number, smooth: boolean) => void;
@@ -61,13 +67,11 @@ declare module "panzoom" {
     smoothMoveTo: (x: number, y: number) => void;
     moveToCenterOfElement: (
       element: Element,
-      xOffset: number,
-      yOffset: number
+      options?: MoveToCenterOptions
     ) => void;
     moveToCenterOfBounds: (
       bounds: DOMRect,
-      xOffset: number,
-      yOffset: number
+      options?: MoveToCenterOptions
     ) => void;
     centerOn: (ui: any) => void;
     center: (fit: boolean) => void;
