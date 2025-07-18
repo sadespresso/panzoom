@@ -58,7 +58,7 @@ declare module "panzoom" {
     xOffset?: number;
     yOffset?: number;
     smooth?: boolean;
-    zoom?: boolean;
+    zoom?: number;
   }
 
   export interface PanZoom {
