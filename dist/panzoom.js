@@ -128,6 +128,8 @@ function createPanZoom(domElement, options) {
     centerOn: centerOn,
     center: center,
     zoomTo: publicZoomTo,
+    moveToCenterOfElement: moveToCenterOfElement,
+    moveToCenterOfBounds: moveToCenterOfBounds,
     zoomAbs: zoomAbs,
     zoom: zoom,
     smoothZoom: smoothZoom,
@@ -982,6 +984,45 @@ function createPanZoom(domElement, options) {
   function publicZoomTo(clientX, clientY, scaleMultiplier) {
     cancelZoomAnimation();
     return zoomByRatio(clientX, clientY, scaleMultiplier);
+  }
+
+
+  /**
+   * Calculate the center of a given bounding rectangle's position from our container viewpoint
+   * @param {DOMRect} elemBounds 
+   */
+  function getCenterOfBounds(elemBounds) {
+    const containerBounds = owner.getBoundingClientRect();
+
+    const centerX = -elemBounds.left + (((containerBounds.width / 2) - (elemBounds.width / 2)));
+    const centerY = -elemBounds.top + (((containerBounds.height / 2) - (elemBounds.height / 2)) + containerBounds.top);
+
+    const newX = transform.x + centerX;
+    const newY = transform.y + centerY;
+
+    return { x: newX, y: newY };
+  }
+
+  /**
+   * Moves the view to the center of element
+   * @param {Element} element get the center of this HTML element
+   * @param {Number} xOffset offset x pixels from center horizontally
+   * @param {Number} yOffset offset y pixels from center vertically
+   */
+  function moveToCenterOfElement(element, xOffset = 0, yOffset = 0) {
+    const localBounds = element.getBoundingClientRect();
+    moveToCenterOfBounds(localBounds, xOffset, yOffset);
+  }
+
+  /**
+   * Moves the view to the center of the bounding rectangle
+   * @param {DOMRect} localBounds
+   * @param {Number} xOffset offset x pixels from center horizontally
+   * @param {Number} yOffset offset y pixels from center vertically
+   */
+  function moveToCenterOfBounds(localBounds, xOffset = 0, yOffset = 0) {
+    const { x, y } = getCenterOfBounds(localBounds);
+    moveTo(x + xOffset, y + yOffset);
   }
 
   function cancelZoomAnimation() {

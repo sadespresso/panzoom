@@ -64,6 +64,11 @@ declare module "panzoom" {
       xOffset: number,
       yOffset: number
     ) => void;
+    moveToCenterOfBounds: (
+      bounds: DOMRect,
+      xOffset: number,
+      yOffset: number
+    ) => void;
     centerOn: (ui: any) => void;
     center: (fit: boolean) => void;
     zoomTo: (clientX: number, clientY: number, scaleMultiplier: number) => void;

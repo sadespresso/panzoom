@@ -991,15 +991,15 @@ function createPanZoom(domElement, options) {
    * @param {DOMRect} elemBounds 
    */
   function getCenterOfBounds(elemBounds) {
-    const containerBounds = owner.getBoundingClientRect()
+    const containerBounds = owner.getBoundingClientRect();
 
-    const centerX = -elemBounds.left + (((containerBounds.width / 2) - (elemBounds.width / 2)))
-    const centerY = -elemBounds.top + (((containerBounds.height / 2) - (elemBounds.height / 2)) + containerBounds.top)
+    const centerX = -elemBounds.left + (((containerBounds.width / 2) - (elemBounds.width / 2)));
+    const centerY = -elemBounds.top + (((containerBounds.height / 2) - (elemBounds.height / 2)) + containerBounds.top);
 
-    const newX = transform.x + centerX
-    const newY = transform.y + centerY
+    const newX = transform.x + centerX;
+    const newY = transform.y + centerY;
 
-    return { x: newX, y: newY }
+    return { x: newX, y: newY };
   }
 
   /**
@@ -1009,19 +1009,19 @@ function createPanZoom(domElement, options) {
    * @param {Number} yOffset offset y pixels from center vertically
    */
   function moveToCenterOfElement(element, xOffset = 0, yOffset = 0) {
-    const bounds = element.getBoundingClientRect()
-    moveToCenterOfBounds(bounds, xOffset, yOffset)
+    const localBounds = element.getBoundingClientRect();
+    moveToCenterOfBounds(localBounds, xOffset, yOffset);
   }
 
   /**
    * Moves the view to the center of the bounding rectangle
-   * @param {DOMRect} bounds
+   * @param {DOMRect} localBounds
    * @param {Number} xOffset offset x pixels from center horizontally
    * @param {Number} yOffset offset y pixels from center vertically
    */
-  function moveToCenterOfBounds(bounds, xOffset = 0, yOffset = 0) {
-    const { x, y } = getCenterOfBounds(bounds)
-    moveTo(x + xOffset, y + yOffset)
+  function moveToCenterOfBounds(localBounds, xOffset = 0, yOffset = 0) {
+    const { x, y } = getCenterOfBounds(localBounds);
+    moveTo(x + xOffset, y + yOffset);
   }
 
   function cancelZoomAnimation() {
