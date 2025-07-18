@@ -1018,9 +1018,9 @@ function createPanZoom(domElement, options) {
 
     if (localZoom) {
       if (smooth) {
-        smoothZoom(x + xOffset, y + yOffset, localZoom);
+        smoothZoomAbs(x + xOffset, y + yOffset, localZoom);
       } else {
-        zoom(x + xOffset, y + yOffset, localZoom);
+        zoomAbs(x + xOffset, y + yOffset, localZoom);
       }
     } else {
       if (smooth) {
