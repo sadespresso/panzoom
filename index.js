@@ -1005,21 +1005,30 @@ function createPanZoom(domElement, options) {
   /**
    * Moves the view to the center of element
    */
-  function moveToCenterOfElement(element, { xOffset = 0, yOffset = 0, smooth = false}) {
+  function moveToCenterOfElement(element, { xOffset = 0, yOffset = 0, smooth = false, zoom: localZoom = false }) {
     const localBounds = element.getBoundingClientRect();
-    moveToCenterOfBounds(localBounds, { xOffset, yOffset, smooth });
+    moveToCenterOfBounds(localBounds, { xOffset, yOffset, smooth, zoom: localZoom });
   }
 
   /**
    * Moves the view to the center of the bounding rectangle
    * @param {DOMRect} localBounds
    */
-  function moveToCenterOfBounds(localBounds, { xOffset = 0, yOffset = 0, smooth = false }) {
+  function moveToCenterOfBounds(localBounds, { xOffset = 0, yOffset = 0, smooth = false, zoom: localZoom = false  }) {
     const { x, y } = getCenterOfBounds(localBounds);
-    if (smooth) {
+
+    if (localZoom) {
+      if (smooth) {
+        smoothZoomAbs(x + xOffset, y + yOffset, transform.scale);
+      } else {
+        zoomAbs(x + xOffset, y + yOffset, transform.scale);
+      }
+    } else {
+      if (smooth) {
       smoothMoveTo(x + xOffset, y + yOffset);
     } else {
       moveTo(x + xOffset, y + yOffset);
+    }
     }
   }
 
