@@ -72,6 +72,7 @@ declare module "panzoom" {
       clientY: number,
       toScaleValue: number
     ) => void;
+    zoom: (ratio: number, smooth?: boolean) => void;
     getTransform: () => Transform;
     showRectangle: (rect: ClientRect) => void;
     pause: () => void;
