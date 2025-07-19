@@ -416,6 +416,15 @@ function createPanZoom(domElement, options) {
 
     var newScale = transform.scale * ratio;
 
+    console.log({
+      newScale,
+      minZoom,maxZoom,
+      ts: transform.scale,
+      minToScale: minZoom / transform.scale,
+      maxToScale: maxZoom / transform.scale,
+    });
+    
+
     if (newScale < minZoom) {
       if (transform.scale === minZoom) return;
 
@@ -447,12 +456,7 @@ function createPanZoom(domElement, options) {
   }
 
   function zoomAbs(clientX, clientY, zoomLevel) {
-    console.log({
-      rawZoomRatio: zoomLevel / transform.scale,
-    });
-
-    var ratio = Math.max(0.0000000001, Math.min(zoomLevel / transform.scale, 100000));
-    
+    var ratio = zoomLevel / transform.scale;
     zoomByRatio(clientX, clientY, ratio);
   }
 
