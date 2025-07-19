@@ -416,15 +416,6 @@ function createPanZoom(domElement, options) {
 
     var newScale = transform.scale * ratio;
 
-    console.log({
-      newScale,
-      minZoom,maxZoom,
-      ts: transform.scale,
-      minToScale: minZoom / transform.scale,
-      maxToScale: maxZoom / transform.scale,
-    });
-    
-
     if (newScale < minZoom) {
       if (transform.scale === minZoom) return;
 
